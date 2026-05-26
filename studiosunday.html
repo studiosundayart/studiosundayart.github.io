@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio Sunday — Mississauga's Creative Social Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --clay: #C4714A;
+    --clay-light: #F2E0D4;
+    --clay-dark: #8B4A2E;
+    --sage: #7A8C6E;
+    --sage-light: #D9E4D2;
+    --cream: #FAF7F2;
+    --charcoal: #2C2A27;
+    --warm-white: #FFFDF9;
+    --terracotta: #B5643A;
+    --sand: #E8DDD0;
+    --ink: #1C1A17;
+    --muted: #7A7570;
+    --section-pad: 6rem 2rem;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+    line-height: 1.25;
+  }
+
+  a { text-decoration: none; color: inherit; }
+
+  img { max-width: 100%; display: block; }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.25rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(250, 247, 242, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(196, 113, 74, 0.15);
+    transition: box-shadow 0.3s;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--clay-dark);
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .nav-logo span {
+    display: inline-block;
+    width: 10px; height: 10px;
+    background: var(--clay);
+    border-radius: 50%;
+    margin-top: -2px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--charcoal);
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--clay); }
+
+  .nav-book {
+    background: var(--clay);
+    color: white !important;
+    padding: 0.55rem 1.25rem;
+    border-radius: 100px;
+    transition: background 0.2s, transform 0.15s !important;
+  }
+
+  .nav-book:hover { background: var(--clay-dark) !important; transform: translateY(-1px); }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 2.5rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 80% 40%, rgba(196,113,74,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 50% at 10% 80%, rgba(122,140,110,0.1) 0%, transparent 50%),
+      var(--cream);
+  }
+
+  .hero-texture {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c4714a' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--clay);
+  }
+
+  .hero h1 {
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 em {
+    color: var(--clay);
+    font-style: italic;
+  }
+
+  .hero-desc {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--clay);
+    color: white;
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--clay-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(139,74,46,0.25); }
+
+  .btn-outline {
+    border: 1.5px solid var(--clay);
+    color: var(--clay);
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { background: var(--clay-light); transform: translateY(-2px); }
+
+  .hero-shape {
+    position: absolute;
+    right: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: min(42vw, 520px);
+    height: min(42vw, 520px);
+    z-index: 1;
+  }
+
+  /* ===== SECTION DEFAULTS ===== */
+  section { padding: var(--section-pad); }
+
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--clay);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--ink);
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 540px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .section-header {
+    margin-bottom: 3.5rem;
+  }
+
+  /* ===== ABOUT ===== */
+  .about {
+    background: var(--warm-white);
+    padding: 6rem 2.5rem;
+  }
+
+  .about-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-blob {
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--clay-light);
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6rem;
+  }
+
+  .about-badge {
+    position: absolute;
+    bottom: 2rem;
+    right: -1rem;
+    background: var(--charcoal);
+    color: white;
+    padding: 1.2rem 1.5rem;
+    border-radius: 16px;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    max-width: 180px;
+  }
+
+  .about-badge strong {
+    display: block;
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+
+  .mission-bar {
+    margin-top: 2.5rem;
+    padding: 1.75rem;
+    background: var(--clay-light);
+    border-radius: 16px;
+    border-left: 4px solid var(--clay);
+  }
+
+  .mission-bar p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--clay-dark);
+    line-height: 1.65;
+  }
+
+  /* ===== CLASSES ===== */
+  .classes {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 2.5rem;
+  }
+
+  .classes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.75rem;
+    margin-top: 3.5rem;
+  }
+
+  .class-card {
+    background: var(--warm-white);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+  }
+
+  .class-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(44,42,39,0.12); }
+
+  .class-card-thumb {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .class-card-body {
+    padding: 1.5rem;
+  }
+
+  .class-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    margin-bottom: 0.75rem;
+    background: var(--clay-light);
+    color: var(--clay-dark);
+  }
+
+  .class-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+
+  .class-card p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+  }
+
+  .class-details {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .class-details span {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  /* ===== ARTIST SPOTLIGHT ===== */
+  .artist {
+    background: var(--charcoal);
+    color: var(--cream);
+    padding: 6rem 2.5rem;
+  }
+
+  .artist-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .artist .section-label { color: var(--clay); }
+  .artist .section-title { color: white; }
+  .artist .section-subtitle { color: rgba(255,255,255,0.55); }
+
+  .artist-portrait {
+    aspect-ratio: 3/4;
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .artist-portrait::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 40%;
+    background: linear-gradient(transparent, rgba(44,42,39,0.8));
+  }
+
+  .artist-portrait-info {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    z-index: 2;
+  }
+
+  .artist-portrait-info h4 {
+    font-size: 1.1rem;
+    color: white;
+    margin-bottom: 0.25rem;
+  }
+
+  .artist-portrait-info span {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .artist-works {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .artist-work-thumb {
+    aspect-ratio: 1;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    background: rgba(255,255,255,0.07);
+    transition: transform 0.2s;
+  }
+
+  .artist-work-thumb:hover { transform: scale(1.03); }
+
+  .rotate-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(196,113,74,0.2);
+    border: 1px solid rgba(196,113,74,0.3);
+    color: #E8A070;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.4rem 0.9rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .rotate-badge::before {
+    content: '↻';
+    font-size: 1rem;
+  }
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonials {
+    background: var(--clay-light);
+    padding: 6rem 2.5rem;
+  }
+
+  .testimonials-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+
+  .testimonial-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    position: relative;
+    transition: transform 0.2s;
+  }
+
+  .testimonial-card:hover { transform: translateY(-4px); }
+
+  .testimonial-quote {
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--clay-light);
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 0.5rem;
+  }
+
+  .testimonial-card p {
+    font-size: 0.95rem;
+    color: var(--charcoal);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .testimonial-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .testimonial-author-info strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .testimonial-author-info span {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .testimonial-stars {
+    position: absolute;
+    top: 1.75rem;
+    right: 1.75rem;
+    color: var(--clay);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+  }
+
+  /* ===== COMMUNITY BOARD ===== */
+  .community {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 2.5rem;
+  }
+
+  .board-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-top: 3.5rem;
+  }
+
+  .board-post {
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+
+  .board-post:hover { transform: translateY(-3px); }
+
+  .board-post-type {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .board-post h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+
+  .board-post p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .board-post-meta {
+    margin-top: 1rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  .board-cta {
+    margin-top: 2.5rem;
+    text-align: center;
+  }
+
+  /* ===== BOOKING ===== */
+  .booking {
+    background: var(--warm-white);
+    padding: 6rem 2.5rem;
+  }
+
+  .booking-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .booking-form {
+    background: white;
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 40px rgba(44,42,39,0.08);
+  }
+
+  .booking-form h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.75rem;
+    color: var(--ink);
+  }
+
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid var(--sand);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--charcoal);
+    background: var(--cream);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--clay);
+    background: white;
+  }
+
+  .form-group textarea { min-height: 90px; resize: vertical; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--clay);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+  }
+
+  .form-submit:hover { background: var(--clay-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(139,74,46,0.25); }
+
+  .booking-info { padding-top: 1rem; }
+
+  .booking-info h2 { margin-bottom: 1rem; }
+
+  .booking-perks {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .booking-perk {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .perk-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: var(--clay-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .perk-text strong {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+
+  .perk-text span {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  /* ===== GALLERY STRIP ===== */
+  .gallery-strip {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .gallery-track {
+    display: flex;
+    gap: 0;
+  }
+
+  .gallery-item {
+    flex: 1;
+    min-width: 200px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    transition: flex 0.3s;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .gallery-item:hover { flex: 2; }
+
+  .gallery-item-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 1rem;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.3s;
+    background: linear-gradient(transparent, rgba(0,0,0,0.6));
+  }
+
+  .gallery-item:hover .gallery-item-label { opacity: 1; transform: translateY(0); }
+
+  /* ===== SUGGESTED PAGES SECTION ===== */
+  .suggested {
+    background: var(--sage-light);
+    padding: 5rem 2.5rem;
+  }
+
+  .suggested-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .suggested-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+
+  .suggested-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    border-left: 3px solid var(--sage);
+    transition: transform 0.2s;
+  }
+
+  .suggested-card:hover { transform: translateY(-3px); }
+
+  .suggested-card .icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .suggested-card h4 { font-size: 1rem; margin-bottom: 0.4rem; color: var(--ink); }
+  .suggested-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.7);
+    padding: 4rem 2.5rem 2rem;
+  }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .footer-brand h3 {
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-brand p {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    max-width: 260px;
+  }
+
+  .footer-col h4 {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: white;
+    margin-bottom: 1rem;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .footer-col ul { list-style: none; }
+
+  .footer-col li {
+    margin-bottom: 0.6rem;
+    font-size: 0.875rem;
+  }
+
+  .footer-col a { transition: color 0.2s; }
+  .footer-col a:hover { color: var(--clay); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .footer-social a {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+
+  .footer-social a:hover {
+    border-color: var(--clay);
+    background: rgba(196,113,74,0.15);
+    color: var(--clay);
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(3deg); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-content > * {
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.25s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.4s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.55s; }
+
+  .hero-shape svg { animation: float 6s ease-in-out infinite; }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { display: none; }
+    .hero { padding: 7rem 1.25rem 4rem; }
+    .hero-shape { display: none; }
+    .about-inner, .artist-inner, .booking-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    section, .classes, .community, .booking { padding: 4rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><span></span>Studio Sunday</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#classes">Classes</a></li>
+    <li><a href="#artist">Artist Spotlight</a></li>
+    <li><a href="#community">Community</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#book" class="nav-book">Book a Class</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-texture"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Mississauga's Creative Social Club</div>
+    <h1>Make something<br><em>beautiful</em><br>together.</h1>
+    <p class="hero-desc">Hands-on creative nights starting with clay — we bring the studio, the materials, and the good vibes right to you.</p>
+    <div class="hero-ctas">
+      <a href="#book" class="btn-primary">Book a Session →</a>
+      <a href="#classes" class="btn-outline">See What We Offer</a>
+    </div>
+  </div>
+  <div class="hero-shape">
+    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="g1" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#F2E0D4"/>
+          <stop offset="100%" stop-color="#E8C9B2"/>
+        </radialGradient>
+        <radialGradient id="g2" cx="30%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="#C4714A" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#C4714A" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <!-- Big blob shape -->
+      <path d="M 250 60 C 350 40 440 100 460 200 C 480 300 430 400 330 440 C 230 480 110 460 70 360 C 30 260 60 140 150 90 C 190 68 220 65 250 60 Z" fill="url(#g1)"/>
+      <path d="M 250 60 C 350 40 440 100 460 200 C 480 300 430 400 330 440 C 230 480 110 460 70 360 C 30 260 60 140 150 90 C 190 68 220 65 250 60 Z" fill="url(#g2)"/>
+      <!-- Decorative clay circles -->
+      <circle cx="180" cy="190" r="60" fill="#C4714A" opacity="0.18"/>
+      <circle cx="310" cy="300" r="40" fill="#7A8C6E" opacity="0.2"/>
+      <circle cx="330" cy="160" r="25" fill="#C4714A" opacity="0.3"/>
+      <!-- Center text -->
+      <text x="250" y="248" text-anchor="middle" font-family="Georgia, serif" font-size="80" fill="#8B4A2E" opacity="0.5">🏺</text>
+      <!-- Small dots -->
+      <circle cx="120" cy="320" r="8" fill="#C4714A" opacity="0.4"/>
+      <circle cx="400" cy="240" r="6" fill="#7A8C6E" opacity="0.4"/>
+      <circle cx="230" cy="400" r="10" fill="#C4714A" opacity="0.25"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-visual">
+      <div class="about-blob">🏺</div>
+      <div class="about-badge">
+        <strong>100%</strong>
+        Mobile Studio — we come to you
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="section-label">Who We Are</div>
+      <h2 class="section-title">Born from the belief that everyone is creative.</h2>
+      <p class="section-subtitle">Studio Sunday is Mississauga's roaming creative social club. We don't have walls — we have wheels. Our instructors show up wherever you are: your home, your backyard, your office, your event venue.</p>
+      <p style="margin-top: 1rem; font-size: 1rem; color: var(--muted); font-weight: 300;">Starting with clay hand-building, we're expanding into multi-medium creative nights — think macramé, painting, candle-making, and more. Every session is equal parts art class and social gathering.</p>
+      <div class="mission-bar">
+        <p>"Our mission is to make hands-on creativity accessible, joyful, and communal — no experience required, just curiosity."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLASSES -->
+<div id="classes">
+<div class="classes">
+  <div class="section-header">
+    <div class="section-label">What We Offer</div>
+    <h2 class="section-title">Our Creative Classes</h2>
+    <p class="section-subtitle">All sessions are BYOL (Bring Your Own Location). We arrive with everything — tools, materials, cleanup supplies, and good energy.</p>
+  </div>
+  <div class="classes-grid">
+
+    <div class="class-card">
+      <div class="class-card-thumb" style="background: linear-gradient(135deg, #F2E0D4, #E8C0A0);">🏺</div>
+      <div class="class-card-body">
+        <span class="class-tag">Signature</span>
+        <h3>Clay Hand-Building</h3>
+        <p>Our flagship class. Learn pinch pots, coil building, and slab construction with air-dry and kiln-fire clay. Perfect for all levels.</p>
+        <div class="class-details">
+          <span>⏱ 2.5 hrs</span>
+          <span>👥 4–12 people</span>
+          <span>✦ All levels</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="class-card">
+      <div class="class-card-thumb" style="background: linear-gradient(135deg, #D9E4D2, #B8D4AC);">🕯️</div>
+      <div class="class-card-body">
+        <span class="class-tag">Coming Soon</span>
+        <h3>Candle & Scent Making</h3>
+        <p>Pour, scent, and style your own soy candles. A relaxing multi-sensory class great for bachelorettes, birthdays, or team nights.</p>
+        <div class="class-details">
+          <span>⏱ 2 hrs</span>
+          <span>👥 4–16 people</span>
+          <span>✦ All levels</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="class-card">
+      <div class="class-card-thumb" style="background: linear-gradient(135deg, #EAD6E8, #D4A8D0);">🎨</div>
+      <div class="class-card-body">
+        <span class="class-tag">Coming Soon</span>
+        <h3>Intuitive Painting Night</h3>
+        <p>Guided abstract acrylic painting session. No prior experience needed — just follow the flow and see what emerges on your canvas.</p>
+        <div class="class-details">
+          <span>⏱ 2 hrs</span>
+          <span>👥 4–20 people</span>
+          <span>✦ All levels</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="class-card">
+      <div class="class-card-thumb" style="background: linear-gradient(135deg, #FAE8D4, #F2C89A);">🪢</div>
+      <div class="class-card-body">
+        <span class="class-tag">Coming Soon</span>
+        <h3>Macramé & Fibre Arts</h3>
+        <p>Knot your way through wall hangings, plant hangers, and mini tapestries. Meditative, tactile, and completely absorbing.</p>
+        <div class="class-details">
+          <span>⏱ 2.5 hrs</span>
+          <span>👥 4–14 people</span>
+          <span>✦ Beginner friendly</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="class-card">
+      <div class="class-card-thumb" style="background: linear-gradient(135deg, #D4E8F0, #A8D0E4);">🫙</div>
+      <div class="class-card-body">
+        <span class="class-tag">Private Event</span>
+        <h3>Pottery Wheel Experience</h3>
+        <p>An introductory session on the wheel for those ready to take their clay journey further. Requires a minimum group booking.</p>
+        <div class="class-details">
+          <span>⏱ 3 hrs</span>
+          <span>👥 4–8 people</span>
+          <span>✦ Beginner</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="class-card">
+      <div class="class-card-thumb" style="background: linear-gradient(135deg, #F2F0DA, #E8E4A8);">🌿</div>
+      <div class="class-card-body">
+        <span class="class-tag">Seasonal</span>
+        <h3>Botanical Printmaking</h3>
+        <p>Use leaves, flowers, and plants to create unique prints on fabric and paper using natural dyes and eco-printing techniques.</p>
+        <div class="class-details">
+          <span>⏱ 2.5 hrs</span>
+          <span>👥 4–14 people</span>
+          <span>✦ All levels</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- GALLERY STRIP -->
+<div class="gallery-strip" id="gallery">
+  <div class="gallery-track">
+    <div class="gallery-item" style="background: #C4714A20;">🏺<div class="gallery-item-label">Clay Hand-Building</div></div>
+    <div class="gallery-item" style="background: #7A8C6E20;">🪴<div class="gallery-item-label">Studio in Nature</div></div>
+    <div class="gallery-item" style="background: #B5643A20;">✨<div class="gallery-item-label">Finished Pieces</div></div>
+    <div class="gallery-item" style="background: #D9E4D220;">🎨<div class="gallery-item-label">Paint Nights</div></div>
+    <div class="gallery-item" style="background: #F2E0D420;">🕯️<div class="gallery-item-label">Candle Making</div></div>
+  </div>
+</div>
+
+<!-- ARTIST SPOTLIGHT -->
+<section class="artist" id="artist">
+  <div class="artist-inner">
+    <div>
+      <div class="rotate-badge">Featured Artist — June 2025</div>
+      <div class="section-label">Artist Spotlight</div>
+      <h2 class="section-title">Local Mississauga Artists</h2>
+      <p class="section-subtitle">Every month we spotlight a Mississauga-based artist — celebrating the incredible creative talent in our community. Each artist shares their story, process, and pieces.</p>
+      <p style="margin-top:1.5rem; color:rgba(255,255,255,0.5); font-size:0.9rem; font-weight:300;">Artists rotate on the first Sunday of each month. Interested in being featured? Submit through our community board.</p>
+      <a href="#community" class="btn-outline" style="margin-top:2rem; display:inline-block; border-color:rgba(196,113,74,0.5); color:#E8A070;">Nominate an Artist →</a>
+    </div>
+    <div>
+      <div class="artist-portrait">
+        🎨
+        <div class="artist-portrait-info">
+          <h4>Amara Osei-Bonsu</h4>
+          <span>Ceramicist & Painter · Port Credit</span>
+        </div>
+      </div>
+      <div class="artist-works">
+        <div class="artist-work-thumb">🏺</div>
+        <div class="artist-work-thumb">🖼️</div>
+        <div class="artist-work-thumb">🌸</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-inner">
+    <div class="section-header">
+      <div class="section-label">What People Say</div>
+      <h2 class="section-title">From Our Community</h2>
+    </div>
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-quote">"</div>
+        <p>We booked Studio Sunday for our team retreat and it completely blew everyone away. The instructor was warm, patient, and incredibly skilled. We all left with clay pieces we were actually proud of.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background: #C4714A;">JL</div>
+          <div class="testimonial-author-info">
+            <strong>Jamie L.</strong>
+            <span>Team Lead · Corporate Booking</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-quote">"</div>
+        <p>I hosted a birthday night with Studio Sunday and it was the most fun I've had in years. The fact that they come to your home makes it so special and effortless. Already planning my next one!</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background: #7A8C6E;">SR</div>
+          <div class="testimonial-author-info">
+            <strong>Sasha R.</strong>
+            <span>Birthday Party Host</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-quote">"</div>
+        <p>I came knowing absolutely nothing about clay. By the end of the session I had a little pinch pot I was genuinely proud of. The community vibe is everything. I've come back three times!</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background: #B5643A;">MP</div>
+          <div class="testimonial-author-info">
+            <strong>Marcus P.</strong>
+            <span>Regular Attendee</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY BOARD -->
+<div id="community">
+<div class="community">
+  <div class="section-header">
+    <div class="section-label">Community</div>
+    <h2 class="section-title">The Community Board</h2>
+    <p class="section-subtitle">A space for our creative community to connect, share, and grow together. Share your work, find collaborators, or organize a spontaneous clay night.</p>
+  </div>
+  <div class="board-grid">
+
+    <div class="board-post" style="background: #F2E0D4;">
+      <div class="board-post-type" style="color: var(--clay-dark);">📸 Share</div>
+      <h4>First pinch pot — I'm obsessed!</h4>
+      <p>Finally made something with my hands after years of wanting to try. The Sunday session at Lakeview Community Centre was perfect.</p>
+      <div class="board-post-meta">Posted by @TamaraK · 2 days ago</div>
+    </div>
+
+    <div class="board-post" style="background: var(--sage-light);">
+      <div class="board-post-type" style="color: var(--sage);">🤝 Looking For</div>
+      <h4>Looking for 3 more people for a private booking</h4>
+      <p>Trying to put together a clay night in Cooksville for end of June. DM me if you want in — we're almost at minimum!</p>
+      <div class="board-post-meta">Posted by @PriyaM · 4 days ago</div>
+    </div>
+
+    <div class="board-post" style="background: #EAD6E8;">
+      <div class="board-post-type" style="color: #8B4A7A;">🎉 Event</div>
+      <h4>Pop-up Clay Night at Celebration Square</h4>
+      <p>Studio Sunday x Mississauga Arts Council are partnering for a free pop-up! Sat July 12, 2–5pm. Spots are limited.</p>
+      <div class="board-post-meta">Posted by Studio Sunday · 1 week ago</div>
+    </div>
+
+    <div class="board-post" style="background: #F2F0DA;">
+      <div class="board-post-type" style="color: #7A6E20;">💬 Discussion</div>
+      <h4>Which class should we add next?</h4>
+      <p>We're planning our fall lineup and want your input. Vote in the poll or drop your ideas below. Mosaic? Weaving? Lino printing?</p>
+      <div class="board-post-meta">Posted by Studio Sunday · 1 week ago</div>
+    </div>
+
+  </div>
+  <div class="board-cta">
+    <a href="#" class="btn-outline" style="border-color: var(--clay);">Post to the Board →</a>
+  </div>
+</div>
+</div>
+
+<!-- BOOKING -->
+<section class="booking" id="book">
+  <div class="booking-inner">
+    <div class="booking-info">
+      <div class="section-label">Reserve Your Spot</div>
+      <h2 class="section-title">Book a Session</h2>
+      <p class="section-subtitle">Private events, bachelorettes, corporate retreats, birthday parties, or just a fun night in — we make it happen.</p>
+      <div class="booking-perks">
+        <div class="booking-perk">
+          <div class="perk-icon">🚐</div>
+          <div class="perk-text">
+            <strong>We Come to You</strong>
+            <span>Within Mississauga & surrounding areas. Setup and cleanup included.</span>
+          </div>
+        </div>
+        <div class="booking-perk">
+          <div class="perk-icon">🎒</div>
+          <div class="perk-text">
+            <strong>Everything Provided</strong>
+            <span>Clay, tools, aprons, and all materials. Just bring yourselves.</span>
+          </div>
+        </div>
+        <div class="booking-perk">
+          <div class="perk-icon">✨</div>
+          <div class="perk-text">
+            <strong>Customizable Sessions</strong>
+            <span>Theme your session, add drinks pairings, or request a specific medium.</span>
+          </div>
+        </div>
+        <div class="booking-perk">
+          <div class="perk-icon">📅</div>
+          <div class="perk-text">
+            <strong>Flexible Scheduling</strong>
+            <span>Weekdays, evenings, weekends. We work around your group's schedule.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="booking-form">
+      <h3>Request a Session</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Amara">
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Johnson">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@email.com">
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="(905) 555-0100">
+      </div>
+      <div class="form-group">
+        <label>Type of Session</label>
+        <select>
+          <option value="">Select a session type...</option>
+          <option>Clay Hand-Building (Signature)</option>
+          <option>Candle & Scent Making</option>
+          <option>Intuitive Painting Night</option>
+          <option>Macramé & Fibre Arts</option>
+          <option>Corporate / Team Event</option>
+          <option>Birthday Party</option>
+          <option>Bachelorette Party</option>
+          <option>Custom / Other</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Group Size</label>
+          <input type="number" placeholder="e.g. 8" min="4" max="40">
+        </div>
+        <div class="form-group">
+          <label>Preferred Date</label>
+          <input type="date">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Tell Us More (Optional)</label>
+        <textarea placeholder="Location, theme ideas, any special requests..."></textarea>
+      </div>
+      <button class="form-submit">Send Booking Request →</button>
+    </div>
+  </div>
+</section>
+
+<!-- SUGGESTED PAGES NOTE (styled as a section for the site owner) -->
+<section class="suggested">
+  <div class="suggested-inner">
+    <div class="section-label" style="color: var(--sage);">Additional Pages</div>
+    <h2 class="section-title" style="color: var(--ink);">Suggested Pages to Add</h2>
+    <p style="color: var(--muted); font-size: 1rem; max-width: 600px;">Here are pages we'd recommend adding to round out Studio Sunday's web presence:</p>
+    <div class="suggested-grid">
+      <div class="suggested-card">
+        <div class="icon">🎁</div>
+        <h4>Gift Cards</h4>
+        <p>Let people gift a Studio Sunday experience. Digital and physical cards for any occasion.</p>
+      </div>
+      <div class="suggested-card">
+        <div class="icon">📸</div>
+        <h4>Gallery / Portfolio</h4>
+        <p>A full photo gallery of past sessions, finished works, and behind-the-scenes moments.</p>
+      </div>
+      <div class="suggested-card">
+        <div class="icon">💼</div>
+        <h4>Corporate & Events</h4>
+        <p>Dedicated page for team-building packages, custom event proposals, and corporate inquiries.</p>
+      </div>
+      <div class="suggested-card">
+        <div class="icon">📰</div>
+        <h4>Blog / Journal</h4>
+        <p>Behind-the-scenes posts, artist interviews, clay tips, and community spotlights for SEO and connection.</p>
+      </div>
+      <div class="suggested-card">
+        <div class="icon">🏅</div>
+        <h4>Membership / Studio Pass</h4>
+        <p>Monthly pass for regulars — priority booking, discounts, and member-only events.</p>
+      </div>
+      <div class="suggested-card">
+        <div class="icon">🤝</div>
+        <h4>Partnerships & Collabs</h4>
+        <p>For local businesses, venues, and brands to co-host creative nights or sponsor events.</p>
+      </div>
+      <div class="suggested-card">
+        <div class="icon">🙋</div>
+        <h4>Teach With Us</h4>
+        <p>Invite guest instructors and local artists to apply to lead a session for the Studio Sunday community.</p>
+      </div>
+      <div class="suggested-card">
+        <div class="icon">📬</div>
+        <h4>Contact / FAQ</h4>
+        <p>A dedicated page for common questions about logistics, cancellations, materials, and accessibility.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h3>Studio Sunday</h3>
+        <p>Mississauga's mobile creative social club. We bring the studio to you — hands-on, no experience required.</p>
+        <p style="margin-top: 1rem;">📍 Serving Mississauga & GTA</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#classes">Our Classes</a></li>
+          <li><a href="#artist">Artist Spotlight</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="#community">Community Board</a></li>
+          <li><a href="#">Blog / Journal</a></li>
+          <li><a href="#">Gift Cards</a></li>
+          <li><a href="#">Membership</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Book</h4>
+        <ul>
+          <li><a href="#book">Book a Session</a></li>
+          <li><a href="#">Corporate Events</a></li>
+          <li><a href="#">Teach With Us</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Studio Sunday. Made with 🏺 in Mississauga.</p>
+      <div class="footer-social">
+        <a href="#" title="Instagram">📸</a>
+        <a href="#" title="TikTok">🎵</a>
+        <a href="#" title="Facebook">💬</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Smooth fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.class-card, .testimonial-card, .board-post, .suggested-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
